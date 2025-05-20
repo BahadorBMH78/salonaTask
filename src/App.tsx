@@ -6,7 +6,7 @@ function App() {
   return (
     <ThemeProvider defaultTheme="system" storageKey="salona-theme">
       <div className="min-h-screen bg-background">
-        <header className="sticky top-0 !z-50 w-full border-b">
+        <header className="sticky top-0 !z-50 w-full shadow-md bg-background ">
           <div className="container mx-auto flex h-16 items-center justify-between px-4">
             <div className="flex items-center">
               <h1 className="text-2xl font-bold tracking-tight">Salona</h1>

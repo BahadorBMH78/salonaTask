@@ -33,6 +33,9 @@ export function ThemeProvider({
   useEffect(() => {
     const root = window.document.documentElement
 
+    // Add class to disable all transitions
+    root.classList.add('theme-switching')
+    
     root.classList.remove("light", "dark")
 
     if (theme === "system") {
@@ -42,10 +45,14 @@ export function ThemeProvider({
         : "light"
 
       root.classList.add(systemTheme)
-      return
+    } else {
+      root.classList.add(theme)
     }
 
-    root.classList.add(theme)
+    // Remove the class after theme switch
+    requestAnimationFrame(() => {
+      root.classList.remove('theme-switching')
+    })
   }, [theme])
 
   const value = {
