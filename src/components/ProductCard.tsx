@@ -2,21 +2,33 @@ import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from '@/comp
 import { Badge } from '@/components/ui/badge';
 import { Star, TrendingUp } from 'lucide-react';
 import { Product } from '@/types/product';
+import { useState } from 'react';
+import { cn } from '@/lib/utils';
 
 interface ProductCardProps {
   product: Product;
 }
 
 export const ProductCard = ({ product }: ProductCardProps) => {
+  const [imageLoaded, setImageLoaded] = useState(false);
+
   return (
     <Card className="relative overflow-hidden bg-background/95 backdrop-blur-sm border-0 shadow-lg shadow-primary/5 hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 group">
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       
       <div className="aspect-video relative overflow-hidden">
+        {!imageLoaded && (
+          <div className="absolute inset-0 bg-muted animate-pulse" />
+        )}
         <img
           src={product.thumbnail}
           alt={product.title}
-          className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105"
+          loading="lazy"
+          onLoad={() => setImageLoaded(true)}
+          className={cn(
+            "object-cover w-full h-full transition-transform duration-500 group-hover:scale-105",
+            !imageLoaded && "opacity-0"
+          )}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
