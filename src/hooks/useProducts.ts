@@ -4,19 +4,16 @@ import { productsApi } from '../api/products';
 interface ProductsQueryParams {
   skip?: number;
   limit?: number;
-  search?: string;
-  category?: string;
-  minPrice?: number;
-  maxPrice?: number;
-  sortBy?: 'price' | 'name';
-  sortOrder?: 'asc' | 'desc';
+  q?: string;
+  sortBy?: 'title' | 'price';
+  order?: 'asc' | 'desc';
 }
 
 export const useProducts = (params: ProductsQueryParams = {}) => {
-  const { skip = 0, limit = 10, search, category, minPrice, maxPrice, sortBy, sortOrder } = params;
+  const { skip = 0, limit = 10, q, sortBy, order } = params;
 
   return useQuery({
-    queryKey: ['products', skip, limit, search, category, minPrice, maxPrice, sortBy, sortOrder],
+    queryKey: ['products', skip, limit, q, sortBy, order],
     queryFn: () => productsApi.getProducts(params),
     staleTime: 1000 * 60 * 5, // 5 minutes
   });
