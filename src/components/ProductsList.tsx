@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useProducts } from '../hooks/useProducts';
 import { ProductsFilter } from './ProductsFilter';
 import { useDebounce } from '@/hooks/useDebounce';
@@ -36,6 +36,18 @@ export const ProductsList = () => {
 
   const totalPages = data ? Math.ceil(data.total / ITEMS_PER_PAGE) : 0;
 
+  const handlePreviousPage = useCallback(() => {
+    setPage(p => Math.max(1, p - 1));
+  }, []);
+
+  const handleNextPage = useCallback(() => {
+    setPage(p => Math.min(totalPages, p + 1));
+  }, [totalPages]);
+
+  const handlePageChange = useCallback((pageNum: number) => {
+    setPage(pageNum);
+  }, []);
+
   return (
     <div className="space-y-4">
       <ProductsFilter
@@ -64,7 +76,7 @@ export const ProductsList = () => {
                   <PaginationItem>
                     <PaginationPrevious 
                       size="default"
-                      onClick={() => setPage(p => Math.max(1, p - 1))}
+                      onClick={handlePreviousPage}
                       className={cn(
                         "hover:bg-primary hover:text-white border-0 cursor-pointer",
                         page === 1 && "pointer-events-none opacity-50"
@@ -89,7 +101,7 @@ export const ProductsList = () => {
                           <PaginationItem>
                             <PaginationLink
                               size="default"
-                              onClick={() => setPage(pageNum)}
+                              onClick={() => handlePageChange(pageNum)}
                               isActive={page === pageNum}
                               className="hover:bg-primary hover:text-white border-0 cursor-pointer"
                             >
@@ -102,7 +114,7 @@ export const ProductsList = () => {
                   <PaginationItem>
                     <PaginationNext
                       size="default"
-                      onClick={() => setPage(p => Math.min(totalPages, p + 1))}
+                      onClick={handleNextPage}
                       className={cn(
                         "hover:bg-primary hover:text-white border-0 cursor-pointer",
                         page === totalPages && "pointer-events-none opacity-50"

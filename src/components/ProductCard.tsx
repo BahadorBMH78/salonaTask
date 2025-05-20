@@ -1,7 +1,6 @@
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Star, TrendingUp, Zap } from 'lucide-react';
+import { Star, TrendingUp } from 'lucide-react';
 import { Product } from '@/types/product';
 
 interface ProductCardProps {

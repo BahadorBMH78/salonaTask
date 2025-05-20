@@ -33,7 +33,6 @@ export const productsApi = {
   }: ProductsQueryParams = {}): Promise<ProductsResponse> => {
     let url = `${baseUrl}/products`;
     
-    // If search query exists, use the search endpoint
     if (q) {
       url = `${baseUrl}/products/search`;
     }
