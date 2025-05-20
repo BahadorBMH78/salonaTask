@@ -1,6 +1,6 @@
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Star, TrendingUp } from 'lucide-react';
+import { Star, Package } from 'lucide-react';
 import { Product } from '@/types/product';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
@@ -69,7 +69,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
             )}
           </div>
           <div className="flex items-center gap-2 text-xs text-muted-foreground/80">
-            <TrendingUp className="w-3 h-3" />
+            <Package className="w-3 h-3" />
             <span>Stock: {product.stock}</span>
           </div>
         </div>
